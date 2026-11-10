@@ -41,6 +41,10 @@ export default {
   tryCrs: 'Koordinaterna passar {crs}.',
   useCrs: 'Byt till det',
   localCoords: 'Ritningen saknar kartkoordinater (den är ritad runt 0,0 i ett lokalt system). Den behöver flyttas till rätt läge i CAD innan den kan läggas in.',
-  autoCrs: 'Koordinatsystem: {crs}, identifierat automatiskt.',
+  prjTip: 'Har ritningen en PRJ-fil, välj eller dra in båda filerna.',
+  crsFromFile: 'Koordinatsystem: {crs}, enligt uppgiften i ritningen.',
+  crsFromPrj: 'Koordinatsystem: {crs}, enligt {file}.',
+  crsFromMap: 'Koordinatsystem: {crs}. Ritningen anger inget, så kartans system används (som i ArcGIS Pro).',
+  crsFromCoords: 'Koordinatsystem: {crs}. Ritningen anger inget och koordinaterna passar inte kartans system, så det har valts utifrån var koordinaterna ligger. Kontrollera att ritningen hamnar rätt.',
   checkCrs: 'Kontrollera ritningens koordinatsystem och välj rätt i listan ovan.'
 }
