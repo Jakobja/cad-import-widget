@@ -24,7 +24,6 @@ export default {
   addToMap: 'Lägg till i kartan',
   cancel: 'Avbryt',
   truncated: 'Ritningen har fler objekt än gränsen; bara de första {max} lästes in.',
-  unsupported: 'Visas inte: {list}.',
   added: '{name} har lagts till i kartan.',
   invalidWkid: 'Ange ett giltigt WKID.',
   addError: 'Kunde inte lägga till ritningen i kartan: {msg}',
