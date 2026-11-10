@@ -31,6 +31,16 @@ export default {
   zoomTo: 'Zooma till',
   remove: 'Ta bort',
   selectedLayers: '{n} av {total} lager valda',
-  focusHint: 'Ritningen innehåller {n} objekt från Focus Arealplan (planens ytor, gränser och beteckningar). De kan inte läsas ur DWG-filen och visas inte.',
-  nothingPlaced: 'Inga objekt i ritningen ligger inom {crs}. Välj ritningens koordinatsystem ovan.'
+  focusHint: 'Planens ytor, gränser och beteckningar är ritade i Focus Arealplan ({n} objekt) och kan inte läsas ur DWG-filen. Använd planens AutoCAD-version i stället (filen som slutar på _AutoCAD), eller exportera planen till AutoCAD från Focus.',
+  civil3dHint: '{n} Civil 3D-objekt ({list}) kan inte läsas. Exportera ritningen med kommandot EXPORTTOAUTOCAD i Civil 3D och läs in den nya filen.',
+  aecHint: '{n} objekt från AutoCAD Architecture/MEP ({list}) kan inte läsas. Exportera ritningen med kommandot -AECEXPORTTOAUTOCAD och läs in den nya filen.',
+  proxyHint: '{n} objekt från tilläggsprogram ({list}) kan inte läsas. Spara om ritningen som vanlig AutoCAD i programmet som skapade den, eller explodera objekten innan du sparar.',
+  xrefHint1: 'Ritningen hänvisar till en extern referens (xref) som inte följer med filen: {list}. Läs in den som en egen fil, eller bind den i AutoCAD (kommandot XREF, Bind) innan du sparar.',
+  xrefHint: 'Ritningen hänvisar till {n} externa referenser (xref) som inte följer med filen: {list}. Läs in dem som egna filer, eller bind dem i AutoCAD (kommandot XREF, Bind) innan du sparar.',
+  nothingPlaced: 'Inga objekt i ritningen ligger inom {crs}.',
+  tryCrs: 'Koordinaterna passar {crs}.',
+  useCrs: 'Byt till det',
+  localCoords: 'Ritningen saknar kartkoordinater (den är ritad runt 0,0 i ett lokalt system). Den behöver flyttas till rätt läge i CAD innan den kan läggas in.',
+  autoCrs: 'Koordinatsystem: {crs}, identifierat automatiskt.',
+  checkCrs: 'Kontrollera ritningens koordinatsystem och välj rätt i listan ovan.'
 }
