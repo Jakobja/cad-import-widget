@@ -25,8 +25,6 @@ export default {
   cancel: 'Avbryt',
   truncated: 'Ritningen har fler objekt än gränsen; bara de första {max} lästes in.',
   unsupported: 'Visas inte: {list}.',
-  outside: 'Ritningens koordinater (E {e}, N {n}) ligger inte inom {crs}. Kontrollera koordinatsystemet, ritningen kan vara i ett lokalt system.',
-  mmHint: 'Ritningen anger millimeter som enhet.',
   added: '{name} har lagts till i kartan.',
   invalidWkid: 'Ange ett giltigt WKID.',
   addError: 'Kunde inte lägga till ritningen i kartan: {msg}',
@@ -34,7 +32,6 @@ export default {
   zoomTo: 'Zooma till',
   remove: 'Ta bort',
   selectedLayers: '{n} av {total} lager valda',
-  outliers: '{n} objekt ligger långt från resten av ritningen och har utelämnats, så att kartan zoomar rätt.',
-  outliersOrigin: '{n} objekt ligger vid origo (0,0), troligen kvarglömda eller block insatta vid 0,0. De har utelämnats, så att kartan zoomar rätt.',
-  includeOutliers: 'Ta med avvikande objekt ({n})'
+  focusHint: 'Ritningen innehåller {n} objekt från Focus Arealplan (planens ytor, gränser och beteckningar). De kan inte läsas ur DWG-filen och visas inte.',
+  nothingPlaced: 'Inga objekt i ritningen ligger inom {crs}. Välj ritningens koordinatsystem ovan.'
 }
