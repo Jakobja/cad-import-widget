@@ -1,0 +1,35 @@
+{
+  "crsList": [
+    {
+      "wkid": 3018,
+      "label": "SWEREF 99 23 15"
+    },
+    {
+      "wkid": 3006,
+      "label": "SWEREF 99 TM"
+    },
+    {
+      "wkid": 3017,
+      "label": "SWEREF 99 21 45"
+    },
+    {
+      "wkid": 3024,
+      "label": "RT90 5 gon O"
+    },
+    {
+      "wkid": 3021,
+      "label": "RT90 2,5 gon V"
+    },
+    {
+      "wkid": 4326,
+      "label": "WGS 84 (grader)"
+    }
+  ],
+  "defaultWkid": 3018,
+  "allowCustomWkid": true,
+  "textMinScale": 10000,
+  "whiteAsBlack": true,
+  "maxFileSizeMB": 100,
+  "maxFeatures": 300000,
+  "showInsertPoints": false
+}

@@ -1,0 +1,22 @@
+{
+  "name": "cad-import",
+  "label": "CAD-import",
+  "type": "widget",
+  "version": "1.0.0",
+  "exbVersion": "1.14.0",
+  "author": "Haparanda kommun",
+  "description": "Läser in DWG- och DXF-filer i kartan, direkt i webbläsaren. Lager, färger, block, attribut, texter och skraffering följer med.",
+  "copyright": "",
+  "license": "GPL-3.0",
+  "properties": {},
+  "translatedLocales": [
+    "en"
+  ],
+  "defaultSize": {
+    "width": 340,
+    "height": 560
+  },
+  "dependency": [
+    "jimu-arcgis"
+  ]
+}
