@@ -33,5 +33,8 @@ export default {
   imported: 'Inlästa ritningar',
   zoomTo: 'Zooma till',
   remove: 'Ta bort',
-  selectedLayers: '{n} av {total} lager valda'
+  selectedLayers: '{n} av {total} lager valda',
+  outliers: '{n} objekt ligger långt från resten av ritningen och har utelämnats, så att kartan zoomar rätt.',
+  outliersOrigin: '{n} objekt ligger vid origo (0,0), troligen kvarglömda eller block insatta vid 0,0. De har utelämnats, så att kartan zoomar rätt.',
+  includeOutliers: 'Ta med avvikande objekt ({n})'
 }
