@@ -17,7 +17,7 @@ var FALT_VA=[
   ["spillv_forbindelse","Spillvatten, höjd vid förbindelsepunkten"],["dagv_forbindelse","Dagvatten, höjd vid förbindelsepunkten"],
   ["spillv_uppdamning","Spillvatten, uppdämningshöjd"],["dagv_uppdamning","Dagvatten, uppdämningshöjd"],
   ["vattentryck","Normalt vattentryck (kg/cm2)"]];
-var CSS=".nyb{padding:12px;height:100%;overflow:auto;font-size:13px;line-height:1.4}"+
+var CSS=".nyb{padding:12px;height:100%;overflow:auto;font-size:13px;line-height:1.4;background:var(--sys-color-surface-paper,#fff);color:var(--sys-color-surface-paper-text,#1f1f1f);box-shadow:0 1px 4px rgba(0,0,0,.25)}"+
   ".nyb h3{font-size:14px;font-weight:600;margin:14px 0 6px}.nyb h3:first-child{margin-top:0}"+
   ".nyb .rad{margin-bottom:8px}.nyb label.et{display:block;font-size:12px;opacity:.8;margin-bottom:2px}"+
   ".nyb .forslag{border:1px solid var(--sys-color-divider-secondary,#ccc);max-height:180px;overflow:auto;margin-top:2px}"+
@@ -111,7 +111,7 @@ var Widget=function(props){
     m.query.executeQueryJSON(cfg.fastighetUrl,q).then(function(r){
       if(nr!==sokNr.current)return;
       var ut=[];r.features.forEach(function(f){var n=bet(attr(f.attributes,cfg.fastighetFalt));if(n&&ut.indexOf(n)<0)ut.push(n)});
-      setForslag(ut.slice(0,15));
+      ut.sort(function(x,y){return x.localeCompare(y,"sv",{numeric:true})});setForslag(ut.slice(0,15));
     }).catch(function(x){if(nr===sokNr.current){setForslag([]);setMedd("Sökningen misslyckades: "+(x&&x.message||x))}});
   }
 
