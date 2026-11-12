@@ -8,7 +8,7 @@ var STANDARD={
   fastighetUrl:"https://geodata.haparanda.se/server/rest/services/Fastigheter_ytor/MapServer/9",
   fastighetFalt:"fastighet",
   detaljplanUrl:"https://geodata.haparanda.se/server/rest/services/Bygg_miljo_lager/MapServer/7",
-  wkid:3018,skalorWidget:[1000,2000,4000,5000],giltighetstid:"1 år"};
+  wkid:3018,skalorWidget:[500,1000,2000,4000,5000],giltighetstid:"1 år"};
 // kartramens matt i mm for varje mall (samma som i cim2dxf.mall_for)
 var RAMAR={"A4 liggande":[152.8,172.8],"A4 stående":[188.8,180.4],"A3 liggande":[275.7669,259.7923],"A3 stående":[152.8,382.8],
   "A2 liggande":[449.8,382.8],"A2 stående":[275.8,556.8],"A1 liggande":[696.8,556.8],"A1 stående":[449.8,803.8],
@@ -48,8 +48,8 @@ var Widget=function(props){
   var _f=S([]),forslag=_f[0],setForslag=_f[1];
   var _o=S(null),obj=_o[0],setObj=_o[1];            // {namn, geom, center0, areal}
   var _c=S(null),center=_c[0],setCenter=_c[1];
-  var skalor=cfg.skalorWidget||STANDARD.skalorWidget;
-  var _s=S(skalor[0]),skala=_s[0],setSkala=_s[1];
+  var skalor=(cfg.skalorWidget||STANDARD.skalorWidget).slice();if(skalor.indexOf(500)<0)skalor.unshift(500);
+  var _s=S(skalor.indexOf(1000)>=0?1000:skalor[0]),skala=_s[0],setSkala=_s[1];
   var _a=S("A3"),ark=_a[0],setArk=_a[1];
   var _ri=S("liggande"),riktning=_ri[0],setRiktning=_ri[1];
   var format=ark+" "+riktning,mm=RAMAR[format];
