@@ -2,7 +2,7 @@
   "name": "nybyggnadskarta-export",
   "label": "Nybyggnadskarta, export",
   "type": "widget",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "exbVersion": "1.14.0",
   "author": "Haparanda kommun",
   "description": "Placerar ett utsnitt fritt i kartan, i A0 till A4 och skala 1:500 till 1:5000, och skapar nybyggnadskartan som PDF och DXF.",
