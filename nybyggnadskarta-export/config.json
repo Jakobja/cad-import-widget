@@ -4,7 +4,11 @@
   "fastighetFalt": "fastighet",
   "detaljplanUrl": "https://geodata.haparanda.se/server/rest/services/Bygg_miljo_lager/MapServer/7",
   "wkid": 3018,
-  "kartramMm": [275.7669, 259.7923],
-  "skalor": [1000, 500],
-  "giltighetstid": "1 år"
+  "giltighetstid": "1 år",
+  "skalorWidget": [
+    1000,
+    2000,
+    4000,
+    5000
+  ]
 }
