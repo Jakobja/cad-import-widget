@@ -29,7 +29,7 @@ var CSS=".nyb{padding:12px;height:100%;overflow:auto;font-size:13px;line-height:
   ".nyb .forslag div{padding:4px 8px;cursor:pointer}.nyb .forslag div:hover{background:rgba(0,120,200,.12)}"+
   ".nyb .info{background:rgba(0,0,0,.05);padding:8px;margin:8px 0}.nyb .fel{background:#fde8e8;color:#8a1c1c;padding:8px;margin:8px 0}"+
   ".nyb .knappar{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.nyb .skala label{margin-right:14px;cursor:pointer}"+
-  ".nyb select{width:100%;height:28px;font-size:13px;border:1px solid var(--sys-color-divider-secondary,#bbb);background:#fff;color:inherit}.nyb .tva{display:flex;gap:8px}.nyb .tva>div{flex:1}.nyb .liten{font-size:12px;opacity:.8}.nyb .plan{margin:2px 0}";
+  ".nyb select{width:100%;height:28px;font-size:13px;border:1px solid var(--sys-color-divider-secondary,#bbb);background:#fff;color:inherit}.nyb .tva{display:flex;gap:8px}.nyb .tva>div{flex:1}.nyb .status{display:flex;align-items:center;gap:8px}.nyb .snurr{width:16px;height:16px;flex:none;border:2px solid rgba(0,0,0,.15);border-top-color:#0079c1;border-radius:50%;animation:nyb-snurr .8s linear infinite}@keyframes nyb-snurr{to{transform:rotate(360deg)}}.nyb .liten{font-size:12px;opacity:.8}.nyb .plan{margin:2px 0}";
 
 function bet(n){return String(n||"").split(">")[0].trim()}
 function sql(s){return String(s).replace(/'/g,"''")}
@@ -196,11 +196,13 @@ var Widget=function(props){
     if(obj&&planer)rit.planer=planer;
     var par={fastighet:obj?obj.namn:"-",skala:String(skala),rithuvud:JSON.stringify(rit),
       mittpunkt:center[0].toFixed(2)+","+center[1].toFixed(2),format:format,lage:"widget"};
-    setJobb({status:"Skickar beställningen …",fel:"",pdf:null,dxf:null,arbetar:true});
+    setJobb({status:"Kartan ritas",procent:0,fel:"",pdf:null,dxf:null,arbetar:true});
     m.gp.submitJob(cfg.gpUrl,par).then(function(j){
       return j.waitForJobCompletion({interval:2500,statusCallback:function(s){
-        var ms=s.messages||[],sista=ms.length?ms[ms.length-1].description:"";
-        setJobb(function(o){return Object.assign({},o,{status:"Kartan ritas … "+(sista?String(sista).trim().slice(0,70):"")})})}})
+        // tjanstens meddelanden "Forlopp NN %" ger procentsatsen, ovriga meddelanden visas inte
+        var ms=s.messages||[],pr=null;
+        for(var i=ms.length-1;i>=0;i--){var mt=/Forlopp\s+(\d+)/.exec(String(ms[i].description||""));if(mt){pr=+mt[1];break}}
+        setJobb(function(o){return Object.assign({},o,{status:"Kartan ritas",procent:pr})})}})
       .then(function(){return Promise.all([j.fetchResultData("dxf"),j.fetchResultData("pdf").catch(function(){return null})])});
     }).then(function(res){
       var u=function(x){return x&&x.value&&(x.value.url||x.value)||null};
@@ -278,7 +280,8 @@ var Widget=function(props){
     visaVa?h("div",{style:{marginTop:6}},FALT_VA.map(falt)):null,
     h("h3",null,"4. Skapa"),
     h(m.Button,{type:"primary",className:"w-100",disabled:!center||jobb.arbetar,onClick:exportera},jobb.arbetar?"Arbetar …":"Skapa PDF och DXF"),
-    jobb.status?h("div",{className:"info"},jobb.status):null,
+    jobb.status?h("div",{className:"info status"},jobb.arbetar?h("span",{className:"snurr","aria-hidden":"true"}):null,
+      jobb.arbetar?jobb.status+" … "+(jobb.procent!=null?jobb.procent+" %":""):jobb.status):null,
     jobb.fel?h("div",{className:"fel"},jobb.fel):null,
     jobb.pdf||jobb.dxf?h("div",{className:"knappar"},
       jobb.pdf?h(m.Button,{size:"sm",type:"primary",onClick:function(){laddaNer(jobb.pdf)}},"Ladda ner PDF"):null,
