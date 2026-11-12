@@ -28,7 +28,7 @@ var CSS=".nyb{padding:12px;height:100%;overflow:auto;font-size:13px;line-height:
   ".nyb .forslag div{padding:4px 8px;cursor:pointer}.nyb .forslag div:hover{background:rgba(0,120,200,.12)}"+
   ".nyb .info{background:rgba(0,0,0,.05);padding:8px;margin:8px 0}.nyb .fel{background:#fde8e8;color:#8a1c1c;padding:8px;margin:8px 0}"+
   ".nyb .knappar{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.nyb .skala label{margin-right:14px;cursor:pointer}"+
-  ".nyb select{width:100%;height:28px;font-size:13px;border:1px solid var(--sys-color-divider-secondary,#bbb);background:#fff;color:inherit}.nyb .tva{display:flex;gap:8px}.nyb .tva>div{flex:1}.nyb .status{display:flex;align-items:center;gap:8px}.nyb .snurr{width:16px;height:16px;flex:none;border:2px solid rgba(0,0,0,.15);border-top-color:#0079c1;border-radius:50%;animation:nyb-snurr .8s linear infinite}@keyframes nyb-snurr{to{transform:rotate(360deg)}}.nyb .liten{font-size:12px;opacity:.8}.nyb .plan{margin:2px 0}";
+  ".nyb select{width:100%;height:28px;font-size:13px;border:1px solid var(--sys-color-divider-secondary,#bbb);background:#fff;color:inherit}.nyb .tva{display:flex;gap:8px}.nyb .tva>div{flex:1}.nyb .stapeltext{display:flex;justify-content:space-between;margin-bottom:6px}.nyb .stapel{height:8px;background:rgba(0,0,0,.12);border-radius:4px;overflow:hidden;position:relative}.nyb .fyllning{height:100%;width:0;background:#0079c1;border-radius:4px;transition:width .6s ease}.nyb .stapel.obestamd .fyllning{position:absolute;width:30%;animation:nyb-glid 1.4s ease-in-out infinite}@keyframes nyb-glid{0%{left:-30%}100%{left:100%}}.nyb .liten{font-size:12px;opacity:.8}.nyb .plan{margin:2px 0}";
 
 function bet(n){return String(n||"").split(">")[0].trim()}
 function sql(s){return String(s).replace(/'/g,"''")}
@@ -282,8 +282,12 @@ var Widget=function(props){
     visaVa?h("div",{style:{marginTop:6}},FALT_VA.map(falt)):null,
     h("h3",null,"4. Skapa"),
     h(m.Button,{type:"primary",className:"w-100",disabled:!center||jobb.arbetar,onClick:exportera},jobb.arbetar?"Arbetar …":"Skapa PDF och DXF"),
-    jobb.status?h("div",{className:"info status"},jobb.arbetar?h("span",{className:"snurr","aria-hidden":"true"}):null,
-      jobb.arbetar?jobb.status+" … "+(jobb.procent!=null?jobb.procent+" %":""):jobb.status):null,
+    jobb.status?(jobb.arbetar?h("div",{className:"info"},
+      h("div",{className:"stapeltext"},h("span",null,jobb.status+" …"),h("span",null,jobb.procent!=null?jobb.procent+" %":"")),
+      h("div",{className:"stapel"+(jobb.procent==null?" obestamd":""),role:"progressbar","aria-valuemin":0,"aria-valuemax":100,
+        "aria-valuenow":jobb.procent!=null?jobb.procent:undefined},
+        h("div",{className:"fyllning",style:jobb.procent!=null?{width:Math.max(2,Math.min(100,jobb.procent))+"%"}:null}))):
+      h("div",{className:"info"},jobb.status)):null,
     jobb.fel?h("div",{className:"fel"},jobb.fel):null,
     jobb.pdf||jobb.dxf?h("div",{className:"knappar"},
       jobb.pdf?h(m.Button,{size:"sm",type:"primary",onClick:function(){laddaNer(jobb.pdf)}},"Ladda ner PDF"):null,
