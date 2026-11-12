@@ -1,0 +1,22 @@
+{
+  "name": "nybyggnadskarta-export",
+  "label": "Nybyggnadskarta, export",
+  "type": "widget",
+  "version": "1.0.0",
+  "exbVersion": "1.14.0",
+  "author": "Haparanda kommun",
+  "description": "Väljer en fastighet, förhandsgranskar utsnittet och skapar nybyggnadskartan som PDF och DXF.",
+  "copyright": "",
+  "license": "",
+  "properties": {},
+  "translatedLocales": [
+    "en"
+  ],
+  "defaultSize": {
+    "width": 360,
+    "height": 640
+  },
+  "dependency": [
+    "jimu-arcgis"
+  ]
+}
