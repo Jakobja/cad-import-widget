@@ -16,7 +16,6 @@ var RAMAR={"A4 liggande":[152.8,172.8],"A4 stående":[188.8,180.4],"A3 liggande"
 var ARK=["A4","A3","A2","A1","A0"];
 var FALT=[
   ["adress","Adress"],["dnr","Diarienummer"],
-  ["faltkontroll_datum","Fältkontroll, datum"],["faltkontroll_av","Fältkontroll, utförd av"],
   ["kartframstallning_av","Kartframställning, utförd av"]];
 var FALT_VA=[
   ["spillv_forbindelse","Spillvatten, höjd vid förbindelsepunkten"],["dagv_forbindelse","Dagvatten, höjd vid förbindelsepunkten"],
@@ -55,7 +54,10 @@ var Widget=function(props){
   var format=ark+" "+riktning,mm=RAMAR[format];
   var _p=S(null),planer=_p[0],setPlaner=_p[1];      // null = inte hamtade
   var _l=S(""),lage=_l[0],setLage=_l[1];            // "", "valj", "flytta"
-  var _r=S({}),rh=_r[0],setRh=_r[1];
+  // kartframstallningen utfors av den som ar inloggad i portalen
+  var anv=props.user?(props.user.fullName||props.user.username||""):"";
+  var _r=S(anv?{kartframstallning_av:anv}:{}),rh=_r[0],setRh=_r[1];
+  R.useEffect(function(){if(anv)setRh(function(o){return o.kartframstallning_av?o:Object.assign({},o,{kartframstallning_av:anv})})},[anv]);
   var _va=S(false),visaVa=_va[0],setVisaVa=_va[1];
   var _j=S({status:"",fel:"",pdf:null,dxf:null,arbetar:false}),jobb=_j[0],setJobb=_j[1];
   var _m=S(""),medd=_m[0],setMedd=_m[1];
@@ -274,7 +276,7 @@ var Widget=function(props){
       flyttad?h(m.Button,{size:"sm",disabled:jobb.arbetar,onClick:function(){setCenter(obj.center0);zooma(obj.center0,skala)}},"Till fastigheten"):null,
       center?h(m.Button,{size:"sm",type:"tertiary",onClick:function(){zooma(center,skala)}},"Zooma till utsnittet"):null),
     h("h3",null,"3. Uppgifter i rithuvudet"),
-    h("div",{className:"liten rad"},"Upprättad och kartframställningens datum sätts till "+idag+". Areal och detaljplan fylls i automatiskt när en fastighet är vald. Uppgifterna låses i filen."),
+    h("div",{className:"liten rad"},"Upprättad och kartframställningens datum sätts till "+idag+". Areal och detaljplan fylls i automatiskt när en fastighet är vald. Kartan är en förenklad nybyggnadskarta, fältkontroll anges som ej utförd. Uppgifterna låses i filen."),
     FALT.map(falt),
     h(m.Button,{size:"sm",type:"tertiary",onClick:function(){setVisaVa(!visaVa)}},visaVa?"Dölj VA-uppgifter":"Lägg till VA-uppgifter"),
     visaVa?h("div",{style:{marginTop:6}},FALT_VA.map(falt)):null,
